@@ -1,0 +1,107 @@
+﻿@page
+@model InterviewBot.Pages.Account.RegisterPageModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_AuthLayout";
+}
+
+<style>
+    .register-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        min-height: 100vh;
+        background-color: #f8f9fa;
+    }
+
+    .register-card {
+        width: 100%;
+        max-width: 900px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .register-card .card-header {
+            padding: 1.5rem;
+        }
+
+        .register-card .card-body {
+            padding: 2rem;
+        }
+
+    @@media (max-width: 576px) {
+        .register-card .card-body
+
+    {
+        padding: 1rem;
+    }
+
+    }
+</style>
+
+<div class="container-fluid register-container">
+    <div class="card shadow-lg register-card border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h2 class="mb-0">Create Account</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Input.FullName" class="form-label"></label>
+                        <input asp-for="Input.FullName" class="form-control" />
+                        <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Input.Password" class="form-label"></label>
+                        <input asp-for="Input.Password" type="password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Input.ConfirmPassword" class="form-label"></label>
+                        <input asp-for="Input.ConfirmPassword" type="password" class="form-control" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Input.Education" class="form-label"></label>
+                        <input asp-for="Input.Education" class="form-control" />
+                        <span asp-validation-for="Input.Education" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Input.Experience" class="form-label"></label>
+                        <input asp-for="Input.Experience" class="form-control" />
+                        <span asp-validation-for="Input.Experience" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Input.CurrentPosition" class="form-label"></label>
+                        <input asp-for="Input.CurrentPosition" class="form-control" />
+                        <span asp-validation-for="Input.CurrentPosition" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                    <a asp-page="/Account/Login" class="btn btn-outline-secondary">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Correct use: This just executes the partial view -->
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

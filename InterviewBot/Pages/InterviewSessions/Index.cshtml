@@ -1,0 +1,75 @@
+@page
+@model InterviewBot.Pages.InterviewSessions.IndexModel
+@{
+    ViewData["Title"] = "Interview Sessions";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Interview Sessions</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>SubTopic</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Score</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var session in Model.Sessions)
+                        {
+                            <tr>
+                                <td>@session.SubTopic.Title</td>
+                                <td>@session.StartTime.ToString("g")</td>
+                                <td>@(session.IsCompleted? session.EndTime?.ToString("g") : "Ongoing")</td>
+                                <td>
+                                    @if (session.Result != null)
+                                    {
+                                        <span class="badge @(session.Result.Score >= 70 ? "bg-success" : session.Result.Score >= 50 ? "bg-warning" : "bg-danger")">
+                                            @session.Result.Score/100
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (session.IsCompleted)
+                                    {
+                                        <a asp-page="Export" asp-route-id="@session.Id" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-download"></i> PDF
+                                        </a>
+                                        <a asp-page="Results" asp-route-id="@session.Id" class="btn btn-sm btn-outline-success ms-2">
+                                            <i class="bi bi-graph-up"></i> Results
+                                        </a>
+                                    }
+                                    else if (session.EndTime.HasValue)
+                                    {
+                                        <span class="text-muted">Disconnected</span>
+                                        <a href="/Chat?subTopicId=@session.SubTopicId&resume=@session.Id" class="btn btn-sm btn-outline-primary ms-2">
+                                            <i class="bi bi-arrow-clockwise"></i> Resume
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" asp-page-handler="Complete" asp-route-id="@session.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-warning">
+                                                <i class="bi bi-check-circle"></i> Complete
+                                            </button>
+                                        </form>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+﻿@page
+@model InterviewBot.Pages.InterviewSessions.ResultsModel
+@{
+    ViewData["Title"] = "Interview Results";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Interview Results</h3>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>Candidate Information</h5>
+                    <p><strong>Name:</strong> @Model.Session.CandidateName</p>
+                    <p><strong>Email:</strong> @Model.Session.CandidateEmail</p>
+                    <p><strong>Education:</strong> @Model.Session.CandidateEducation</p>
+                    <p><strong>Experience:</strong> @Model.Session.CandidateExperience years</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Interview Details</h5>
+                    <p><strong>Topic:</strong> @Model.Session.SubTopic.Title</p>
+                    <p><strong>Date:</strong> @Model.Session.StartTime.ToString("f")</p>
+                    <p>
+                        <strong>Duration:</strong>
+                        @if (Model.Session.EndTime.HasValue)
+                        {
+                            @((Model.Session.EndTime - Model.Session.StartTime)?.ToString(@"hh\:mm\:ss"))
+                        }
+                        else
+                        {
+                            <text>Not completed</text>
+                        }
+                    </p>
+                    <p>
+                        <strong>Score:</strong>
+                        @if (Model.Session.Result?.Score != null)
+                        {
+                            <span class="badge @(Model.Session.Result.Score >= 70 ? "bg-success" : Model.Session.Result.Score >= 50 ? "bg-warning" : "bg-danger")">
+                                @Model.Session.Result.Score/100
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Not evaluated</span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Session.Result?.Evaluation))
+            {
+                <div class="mb-4">
+                    <h5>Evaluation</h5>
+                    <div class="card">
+                        <div class="card-body" style="white-space: pre-wrap;">@Model.Session.Result.Evaluation</div>
+                    </div>
+                </div>
+            }
+
+            <h5 class="mb-3">Question & Answer Breakdown</h5>
+            @if (Model.Session.Result?.Questions != null && Model.Session.Result.Questions.Any())
+            {
+                <div class="accordion" id="qaAccordion">
+                    @foreach (var qa in Model.Session.Result.Questions)
+                    {
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-@qa.Id">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@qa.Id">
+                                    @qa.Question
+                                </button>
+                            </h2>
+                            <div id="collapse-@qa.Id" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <p><strong>Your Answer:</strong> @qa.Answer</p>
+                                    @if (!string.IsNullOrEmpty(qa.Feedback))
+                                    {
+                                        <p><strong>Feedback:</strong> @qa.Feedback</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">No questions available for this session.</div>
+            }
+        </div>
+        <div class="card-footer text-end">
+            <a href="/InterviewSessions" class="btn btn-secondary">Back to Sessions</a>
+            @if (Model.Session.IsCompleted)
+            {
+                <a href="/InterviewSessions/Export?id=@Model.Session.Id" class="btn btn-primary ms-2">
+                    <i class="bi bi-download"></i> Export to PDF
+                </a>
+            }
+        </div>
+    </div>
+</div>
