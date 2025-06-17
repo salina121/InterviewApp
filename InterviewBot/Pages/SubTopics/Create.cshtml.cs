@@ -21,9 +21,21 @@ namespace InterviewBot.Pages.SubTopics
 
         public CreateModel(AppDbContext db) => _db = db;
 
-        public void OnGet()
+        //public void OnGet()
+        //{
+        //    TopicOptions = new SelectList(_db.Topics.ToList(), "Id", "Title");
+        //}
+
+
+        public async Task OnGetAsync(int? topicId)
         {
             TopicOptions = new SelectList(_db.Topics.ToList(), "Id", "Title");
+
+            // Preselect the topic if topicId is provided
+            if (topicId.HasValue)
+            {
+                SubTopic.TopicId = topicId.Value;
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()

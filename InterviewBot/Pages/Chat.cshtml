@@ -293,11 +293,16 @@
 
 
         // End Early Button
-                endEarlyBtn.addEventListener('click', async function() {
+        endEarlyBtn.addEventListener('click', async function() {
             try {
                 if (confirm("Are you sure you want to end the interview early? Your progress will be saved.")) {
                     addSystemMessage("Ending interview early...");
                     await connection.invoke("EndInterviewEarly");
+
+                    // Disable UI elements
+                    messageInput.disabled = true;
+                    sendButton.disabled = true;
+                    endEarlyBtn.disabled = true;
                 }
             } catch (err) {
                 console.error("Error ending interview early:", err);

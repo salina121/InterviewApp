@@ -39,9 +39,20 @@ public class ChatHub : Hub
     {
         if (_sessions.TryRemove(Context.ConnectionId, out var session))
         {
-            session.EndTime = DateTime.UtcNow;
-            await _db.SaveChangesAsync();
-            Console.WriteLine($"Session ended for connection: {Context.ConnectionId}");
+            try
+            {
+                session.EndTime = DateTime.UtcNow;
+                if (!session.IsCompleted)
+                {
+                    session.IsCompleted = true;
+                    session.Summary = "Disconnected before completion";
+                }
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving disconnected session: {ex}");
+            }
         }
         _questionTrackers.TryRemove(Context.ConnectionId, out _);
         await base.OnDisconnectedAsync(exception);
@@ -240,6 +251,38 @@ public class ChatHub : Hub
             Console.WriteLine($"Error completing interview: {ex}");
             await Clients.Caller.SendAsync("ReceiveMessage", "System",
                 "Error completing interview. Please check the results page.");
+        }
+        finally
+        {
+            _sessions.TryRemove(Context.ConnectionId, out _);
+            _questionTrackers.TryRemove(Context.ConnectionId, out _);
+        }
+    }
+
+    public async Task EndInterviewEarly()
+    {
+        if (!_sessions.TryGetValue(Context.ConnectionId, out var session))
+        {
+            await Clients.Caller.SendAsync("ReceiveMessage", "System", "No active session found.");
+            return;
+        }
+
+        try
+        {
+            // Mark session as completed
+            session.IsCompleted = true;
+            session.EndTime = DateTime.UtcNow;
+            await _db.SaveChangesAsync();
+
+            // Notify client
+            await Clients.Caller.SendAsync("ReceiveMessage", "System", "Interview ended early. Your progress has been saved.");
+            await Clients.Caller.SendAsync("RedirectToResults", session.Id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error ending interview early: {ex}");
+            await Clients.Caller.SendAsync("ReceiveMessage", "System",
+                "Error ending interview early. Please try again.");
         }
         finally
         {
