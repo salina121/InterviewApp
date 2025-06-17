@@ -45,7 +45,7 @@ namespace InterviewBot.Pages.Topics
                 await _db.SaveChangesAsync();
 
                 // Redirect to add subtopics
-                return RedirectToPage("AddSubtopics", new { id = newTopic.Id });
+                return RedirectToPage("/SubTopics/Create", new { topicId = newTopic.Id });
             }
             catch (Exception ex)
             {
