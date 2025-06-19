@@ -18,6 +18,9 @@ namespace InterviewBot.Pages
         [BindProperty(SupportsGet = true)]
         public int SubTopicId { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int? ResumeSessionId { get; set; }
+
         public SubTopic SubTopic { get; set; } = null!;
 
         public async Task<IActionResult> OnGetAsync()

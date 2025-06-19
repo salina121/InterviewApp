@@ -20,7 +20,8 @@ namespace InterviewBot.Pages
 
         public void OnGet()
         {
-            Topics = _db.Topics.Include(t => t.SubTopics).ToList();
+            var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
+            Topics = _db.Topics.Include(t => t.SubTopics).Where(t => t.UserId == userId).ToList();
             Console.WriteLine($"Index page accessed. Authenticated: {User.Identity.IsAuthenticated}");
         }
     }

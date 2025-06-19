@@ -41,17 +41,12 @@ namespace InterviewBot.Migrations
                     b.Property<int>("SessionId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SessionId1")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SessionId");
-
-                    b.HasIndex("SessionId1");
 
                     b.ToTable("ChatMessages");
                 });
@@ -188,6 +183,12 @@ namespace InterviewBot.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CandidateEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -196,9 +197,14 @@ namespace InterviewBot.Migrations
                     b.Property<int>("TopicId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TopicId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("SubTopics");
                 });
@@ -211,11 +217,19 @@ namespace InterviewBot.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Objectives")
+                        .HasColumnType("text");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Topics");
                 });
@@ -273,15 +287,9 @@ namespace InterviewBot.Migrations
 
             modelBuilder.Entity("InterviewBot.Models.ChatMessage", b =>
                 {
-                    b.HasOne("InterviewBot.Models.InterviewSession", null)
+                    b.HasOne("InterviewBot.Models.InterviewSession", "Session")
                         .WithMany("Messages")
                         .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InterviewBot.Models.InterviewSession", "Session")
-                        .WithMany()
-                        .HasForeignKey("SessionId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -335,7 +343,26 @@ namespace InterviewBot.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("InterviewBot.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Topic");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("InterviewBot.Models.Topic", b =>
+                {
+                    b.HasOne("InterviewBot.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("InterviewBot.Models.InterviewResult", b =>

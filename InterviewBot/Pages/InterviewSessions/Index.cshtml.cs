@@ -1,12 +1,14 @@
-
 using InterviewBot.Data;
 using InterviewBot.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace InterviewBot.Pages.InterviewSessions
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _db;
@@ -19,32 +21,17 @@ namespace InterviewBot.Pages.InterviewSessions
 
         public async Task OnGetAsync()
         {
-            Sessions = await _db.InterviewSessions
-                .Include(s => s.SubTopic)
-                .Include(s => s.Result)
-                .OrderByDescending(s => s.StartTime)
-                .ToListAsync();
-        }
-
-        public async Task<IActionResult> OnPostCompleteAsync(int id)
-        {
-            var session = await _db.InterviewSessions
-                .Include(s => s.Result)
-                .FirstOrDefaultAsync(s => s.Id == id);
-
-            if (session == null)
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
-                return NotFound();
+                Sessions = await _db.InterviewSessions
+                    .Include(s => s.SubTopic)
+                        .ThenInclude(st => st.Topic)
+                    .Include(s => s.Result)
+                    .Where(s => s.UserId == userId)
+                    .OrderByDescending(s => s.StartTime)
+                    .ToListAsync();
             }
-
-            if (!session.IsCompleted)
-            {
-                session.IsCompleted = true;
-                session.EndTime = DateTime.UtcNow;
-                await _db.SaveChangesAsync();
-            }
-
-            return RedirectToPage("Results", new { id });
         }
     }
 }

@@ -63,10 +63,20 @@ namespace InterviewBot.Pages.Account
 
         public async Task<IActionResult> OnPostGuestAsync()
         {
+            // Find the highest demo number
+            int demoNumber = 1;
+            var lastDemo = await _db.Users
+                .Where(u => u.IsGuest && u.FullName.StartsWith("demo"))
+                .OrderByDescending(u => u.FullName)
+                .FirstOrDefaultAsync();
+            if (lastDemo != null && int.TryParse(lastDemo.FullName.Replace("demo", ""), out int lastNum))
+            {
+                demoNumber = lastNum + 1;
+            }
             var guestUser = new User
             {
-                Email = $"guest_{Guid.NewGuid()}@interviewbot.com",
-                FullName = "Guest User",
+                Email = $"demo{demoNumber}@interviewbot.com",
+                FullName = $"demo{demoNumber}",
                 IsGuest = true,
                 CreatedAt = DateTime.UtcNow,
                 PasswordHash = "" // Empty for guests

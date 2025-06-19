@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace InterviewBot.Pages.SubTopics
 {
@@ -57,17 +58,27 @@ namespace InterviewBot.Pages.SubTopics
                     return Page();
                 }
 
-                // Create new subtopic with only the necessary properties
+                // Get the current user's ID
+                var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
                 var newSubTopic = new SubTopic
                 {
                     Title = SubTopic.Title,
-                    TopicId = SubTopic.TopicId
+                    Description = SubTopic.Description,
+                    CandidateEmail = SubTopic.CandidateEmail,
+                    TopicId = SubTopic.TopicId,
+                    UserId = userId
                 };
 
                 _db.SubTopics.Add(newSubTopic);
                 await _db.SaveChangesAsync();
 
-                return RedirectToPage("Index");
+                if (!string.IsNullOrWhiteSpace(newSubTopic.CandidateEmail))
+                {
+                    // TODO: Implement email sending logic here
+                    // For example: await _emailSender.SendInterviewInviteAsync(newSubTopic);
+                }
+
+                return RedirectToPage("Index", new { topicId = newSubTopic.TopicId });
             }
             catch (Exception ex)
             {
@@ -82,6 +93,11 @@ namespace InterviewBot.Pages.SubTopics
             [Required]
             [StringLength(100)]
             public string Title { get; set; } = null!;
+
+            public string? Description { get; set; }
+
+            [EmailAddress]
+            public string? CandidateEmail { get; set; }
 
             [Required]
             public int TopicId { get; set; }

@@ -20,11 +20,12 @@ namespace InterviewBot.Pages.SubTopics
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
             var subTopic = await _db.SubTopics.FindAsync(id);
-            if (subTopic == null) return NotFound();
+            if (subTopic == null || subTopic.UserId != userId) return NotFound();
 
             SubTopic = subTopic;
-            TopicOptions = new SelectList(_db.Topics.ToList(), "Id", "Title", subTopic.TopicId);
+            TopicOptions = new SelectList(_db.Topics.Where(t => t.UserId == userId).ToList(), "Id", "Title", subTopic.TopicId);
             return Page();
         }
 
@@ -32,31 +33,40 @@ namespace InterviewBot.Pages.SubTopics
         {
             if (!ModelState.IsValid)
             {
-                TopicOptions = new SelectList(_db.Topics.ToList(), "Id", "Title");
+                var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
+                TopicOptions = new SelectList(_db.Topics.Where(t => t.UserId == userId).ToList(), "Id", "Title");
                 return Page();
             }
 
+            var userIdCheck = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
+            var subTopic = await _db.SubTopics.FindAsync(SubTopic.Id);
+            if (subTopic == null || subTopic.UserId != userIdCheck) return NotFound();
+
             var topic = await _db.Topics.FindAsync(SubTopic.TopicId);
-            if (topic == null)
+            if (topic == null || topic.UserId != userIdCheck)
             {
                 ModelState.AddModelError("SubTopic.TopicId", "Selected topic doesn't exist");
-                TopicOptions = new SelectList(_db.Topics.ToList(), "Id", "Title");
+                TopicOptions = new SelectList(_db.Topics.Where(t => t.UserId == userIdCheck).ToList(), "Id", "Title");
                 return Page();
             }
 
             using var transaction = await _db.Database.BeginTransactionAsync();
             try
             {
-                _db.SubTopics.Update(SubTopic);  // Changed from Add to Update
+                subTopic.Title = SubTopic.Title;
+                subTopic.Description = SubTopic.Description;
+                subTopic.CandidateEmail = SubTopic.CandidateEmail;
+                subTopic.TopicId = SubTopic.TopicId;
+                _db.SubTopics.Update(subTopic);
                 await _db.SaveChangesAsync();
                 await transaction.CommitAsync();
-                return RedirectToPage("Index");
+                return RedirectToPage("Index", new { topicId = subTopic.TopicId });
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
                 ModelState.AddModelError("", "Error saving subtopic: " + ex.Message);
-                TopicOptions = new SelectList(_db.Topics.ToList(), "Id", "Title");
+                TopicOptions = new SelectList(_db.Topics.Where(t => t.UserId == userIdCheck).ToList(), "Id", "Title");
                 return Page();
             }
         }

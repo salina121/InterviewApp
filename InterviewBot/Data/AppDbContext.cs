@@ -46,9 +46,9 @@ namespace InterviewBot.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Configure InterviewSession-ChatMessage relationship
-            modelBuilder.Entity<InterviewSession>()
-                .HasMany(s => s.Messages)
-                .WithOne()
+            modelBuilder.Entity<ChatMessage>()
+                .HasOne(m => m.Session)
+                .WithMany(s => s.Messages)
                 .HasForeignKey(m => m.SessionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -99,6 +99,20 @@ namespace InterviewBot.Data
             modelBuilder.Entity<ChatMessage>()
                 .Property(m => m.Content)
                 .HasMaxLength(2000);
+
+            // Configure Topic-User relationship
+            modelBuilder.Entity<Topic>()
+                .HasOne(t => t.User)
+                .WithMany()
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure SubTopic-User relationship
+            modelBuilder.Entity<SubTopic>()
+                .HasOne(st => st.User)
+                .WithMany()
+                .HasForeignKey(st => st.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

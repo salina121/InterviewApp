@@ -16,8 +16,9 @@ namespace InterviewBot.Pages.Topics
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
             var topic = await _db.Topics.FindAsync(id);
-            if (topic == null) return NotFound();
+            if (topic == null || topic.UserId != userId) return NotFound();
 
             Topic = topic;
             return Page();
@@ -28,7 +29,13 @@ namespace InterviewBot.Pages.Topics
             if (!ModelState.IsValid)
                 return Page();
 
-            _db.Topics.Update(Topic);
+            var userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
+            var topic = await _db.Topics.FindAsync(Topic.Id);
+            if (topic == null || topic.UserId != userId) return NotFound();
+
+            topic.Title = Topic.Title;
+            topic.Objectives = Topic.Objectives;
+            _db.Topics.Update(topic);
             await _db.SaveChangesAsync();
             return RedirectToPage("Index");
         }

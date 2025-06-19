@@ -1,14 +1,25 @@
 ﻿@page
 @model InterviewBot.Pages.SubTopics.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "SubTopics";
+    ViewData["Title"] = Localizer["SubTopics"];
+    var topicIdForCreate = Model.CurrentTopic?.Id;
+    var currentCulture = HttpContext.Request.Query["culture"].ToString();
+    var cultureParam = !string.IsNullOrEmpty(currentCulture) ? $"?culture={currentCulture}" : "";
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>SubTopics</h2>
-        <a asp-page="Create" class="btn btn-primary">
-            <i class="bi bi-plus-lg"></i> Create New
+        <div>
+            <h2>@Localizer["List of SUB TOPICS"]</h2>
+            @if (Model.CurrentTopic != null)
+            {
+                <h4 class="text-muted">@Localizer["TOPIC"]: @Model.CurrentTopic.Title</h4>
+            }
+        </div>
+        <a href="/SubTopics/Create?topicId=@topicIdForCreate@(string.IsNullOrEmpty(cultureParam) ? "" : "&" + cultureParam.Substring(1))" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> @Localizer["Create New"]
         </a>
     </div>
 
@@ -18,9 +29,10 @@
                 <table class="table table-hover">
                     <thead class="table-light">
                         <tr>
-                            <th>Title</th>
-                            <th>Topic</th>
-                            <th>Actions</th>
+                            <th>@Localizer["Title"]</th>
+                            <th>@Localizer["Topic"]</th>
+                            <th>@Localizer["Interview Completed"]</th>
+                            <th>@Localizer["Actions"]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,11 +40,25 @@
                         {
                             <tr>
                                 <td>@st.Title</td>
-                                <td>@st.Topic.Title</td>
+                                <td>@st.TopicName</td>
+                                <td>@(st.IsInterviewCompleted ? Localizer["Yes"] : Localizer["No"])</td>
                                 <td>
-                                    <a asp-page="Edit" asp-route-id="@st.Id" class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-pencil"></i> Edit
+                                    @if (st.IsInterviewCompleted)
+                                    {
+                                        <a href="/InterviewSessions/Results?id=@st.CompletedSessionId@(string.IsNullOrEmpty(cultureParam) ? "" : "&" + cultureParam.Substring(1))" class="btn btn-sm btn-outline-success">@Localizer["View Resume"]</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Chat?subTopicId=@st.Id@(string.IsNullOrEmpty(cultureParam) ? "" : "&" + cultureParam.Substring(1))" class="btn btn-sm btn-outline-primary">@Localizer["Start Interview"]</a>
+                                    }
+                                    <a href="/SubTopics/Edit/@st.Id@cultureParam" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-pencil"></i> @Localizer["Edit"]
                                     </a>
+                                    <form method="post" action="/SubTopics?handler=Delete&id=@st.Id&topicId=@Model.CurrentTopic?.Id@(string.IsNullOrEmpty(cultureParam) ? "" : "&" + cultureParam.Substring(1))" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@Localizer["Are you sure?"]');">
+                                            <i class="bi bi-trash"></i> @Localizer["Delete"]
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         }

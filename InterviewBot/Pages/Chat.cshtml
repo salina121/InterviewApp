@@ -1,19 +1,19 @@
-﻿
-
-@page
+﻿@page
 @model InterviewBot.Pages.ChatModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Interview Chat";
+    ViewData["Title"] = Localizer["Interview Chat"];
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Interview: @Model.SubTopic.Title</h2>
+        <h2>@Localizer["Interview"]: @Model.SubTopic.Title</h2>
         <div id="connectionStatus">
-            <span id="connectionIndicator" class="badge bg-secondary">Connecting...</span>
-            <span id="progressIndicator" class="badge bg-info ms-2">Question 0/10</span>
+            <span id="connectionIndicator" class="badge bg-secondary">@Localizer["Connecting..."]</span>
+            <span id="progressIndicator" class="badge bg-info ms-2">@Localizer["Question"] 0/10</span>
             <button class="btn btn-outline-danger" id="endEarlyBtn">
-                <i class="bi bi-stop-circle"></i> End Early
+                <i class="bi bi-stop-circle"></i> @Localizer["End Early"]
             </button>
         </div>
     </div>
@@ -25,19 +25,19 @@
             </div>
 
             <div class="input-group mb-2">
-                <input type="text" id="messageInput" class="form-control" placeholder="Type your answer..." />
+                <input type="text" id="messageInput" class="form-control" placeholder="@Localizer["Type your answer..."]" />
                 <button class="btn btn-primary" id="sendButton" onclick="sendMessage()">
-                    <i class="bi bi-send"></i> Send
+                    <i class="bi bi-send"></i> @Localizer["Send"]
                 </button>
             </div>
             <div class="text-end">
                 <small id="typingIndicator" class="text-muted" style="display: none;">
-                    <i class="bi bi-pencil"></i> Interviewer is typing...
+                    <i class="bi bi-pencil"></i> @Localizer["Interviewer is typing..."]
                 </small>
             </div>
             <div id="completeButtonContainer" class="text-end mt-3" style="display: none;">
                 <button class="btn btn-success" id="completeButton" onclick="completeInterview()">
-                    <i class="bi bi-check-circle"></i> Complete Interview
+                    <i class="bi bi-check-circle"></i> @Localizer["Complete Interview"]
                 </button>
             </div>
         </div>
@@ -119,26 +119,27 @@
         // Connection Management
         async function startConnection() {
             try {
-                updateConnectionStatus("Connecting...", "bg-warning");
+                updateConnectionStatus("@Localizer["Connecting..."]", "bg-warning");
                 await connection.start();
-                updateConnectionStatus("Connected", "bg-success");
+                updateConnectionStatus("@Localizer["Connected"]", "bg-success");
                 sendButton.disabled = false;
 
                 const urlParams = new URLSearchParams(window.location.search);
                 const resumeSessionId = urlParams.get('resume');
+                const currentCulture = urlParams.get('culture') || 'en';
 
                 if (resumeSessionId) {
                     showTypingIndicator(true);
                     await connection.invoke("ResumeInterview", parseInt(resumeSessionId));
                 } else {
                     showTypingIndicator(true);
-                    await connection.invoke("StartInterview", @Model.SubTopicId);
+                    await connection.invoke("StartInterview", @Model.SubTopicId, currentCulture);
                 }
             } catch (err) {
                 console.error("Connection error:", err);
-                updateConnectionStatus("Failed to connect", "bg-danger");
+                updateConnectionStatus("@Localizer["Failed to connect"]", "bg-danger");
                 sendButton.disabled = true;
-                addSystemMessage("Failed to connect. Please refresh the page.");
+                addSystemMessage("@Localizer["Failed to connect. Please refresh the page."]");
             }
         }
 
@@ -148,7 +149,7 @@
         }
 
         function updateProgressIndicator(questionNumber) {
-            progressIndicator.textContent = `Question ${questionNumber}/10`;
+            progressIndicator.textContent = `@Localizer["Question"] ${questionNumber}/10`;
         }
 
         function showTypingIndicator(show) {
@@ -177,8 +178,8 @@
             chatBox.appendChild(messageElement);
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            if (user === "Interviewer" && message.includes("Question")) {
-                const match = message.match(/Question (\d+)\/10/);
+            if (user === "Interviewer" && (message.includes("Question") || message.includes("Pregunta"))) {
+                const match = message.match(/(?:Question|Pregunta) (\d+)\/10/);
                 if (match && match[1]) {
                     updateProgressIndicator(parseInt(match[1]));
                 }
@@ -201,19 +202,23 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title">Interview Results</h5>
+                                <h5 class="modal-title">Interview Completed Successfully!</h5>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <h4 class="mb-3">Your Score: ${score}/100</h4>
-                                <div class="card mb-3">
-                                    <div class="card-body evaluation-content" style="white-space: pre-wrap;">${evaluation}</div>
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                                    <h4 class="text-success mt-2">Interview Completed!</h4>
+                                    <p class="text-muted">Your interview has been completed and evaluated.</p>
+                                </div>
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    You will be redirected to your detailed results page in a few seconds...
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary" onclick="window.location.href='/InterviewSessions'">
-                                    View All Sessions
+                                    View Results Now
                                 </button>
                             </div>
                         </div>
@@ -225,13 +230,13 @@
             const modal = new bootstrap.Modal(document.getElementById('resultModal'));
             modal.show();
 
-            progressIndicator.textContent = "Completed";
+            progressIndicator.textContent = "@Localizer["Completed"]";
             progressIndicator.className = "badge bg-success";
 
-            // Force refresh the session list after a short delay
+            // Redirect to results page after a longer delay to allow user to see the modal
             setTimeout(() => {
                 window.location.href = '/InterviewSessions';
-            }, 3000);
+            }, 5000);
         });
 
         connection.on("RedirectToResults", (sessionId) => {
@@ -239,16 +244,16 @@
         });
 
         connection.onclose(error => {
-            updateConnectionStatus("Disconnected", "bg-danger");
+            updateConnectionStatus("@Localizer["Disconnected"]", "bg-danger");
             sendButton.disabled = true;
             if (error) {
-                addSystemMessage("Connection lost. Reconnecting...");
+                addSystemMessage("@Localizer["Connection lost. Reconnecting..."]");
             }
         });
 
         connection.onreconnected(connectionId => {
-            updateConnectionStatus("Connected", "bg-success");
-            addSystemMessage("Reconnected. Resuming your interview...");
+            updateConnectionStatus("@Localizer["Connected"]", "bg-success");
+            addSystemMessage("@Localizer["Reconnected. Resuming your interview..."]");
             sendButton.disabled = false;
         });
 
@@ -258,7 +263,7 @@
             if (!message) return;
 
             if (connection.state !== signalR.HubConnectionState.Connected) {
-                addSystemMessage("Please wait while we reconnect...");
+                addSystemMessage("@Localizer["Please wait while we reconnect..."]");
                 return;
             }
 
@@ -271,7 +276,7 @@
                 showTypingIndicator(true);
             } catch (err) {
                 console.error("Error sending message:", err);
-                addSystemMessage("Failed to send message. Please try again.");
+                addSystemMessage("@Localizer["Failed to send message. Please try again."]");
             } finally {
                 messageInput.disabled = false;
                 sendButton.disabled = false;
@@ -279,24 +284,23 @@
             }
         }
 
-                async function completeInterview() {
+        async function completeInterview() {
             completeButton.disabled = true;
             try {
-                addSystemMessage("Completing interview and generating evaluation...");
+                addSystemMessage("@Localizer["Completing interview and generating evaluation..."]");
                 await connection.invoke("CompleteInterviewManually");
             } catch (err) {
                 console.error("Error completing interview:", err);
-                addSystemMessage("Failed to complete interview. Please try again.");
+                addSystemMessage("@Localizer["Failed to complete interview. Please try again."]");
                 completeButton.disabled = false;
             }
         }
 
-
         // End Early Button
         endEarlyBtn.addEventListener('click', async function() {
             try {
-                if (confirm("Are you sure you want to end the interview early? Your progress will be saved.")) {
-                    addSystemMessage("Ending interview early...");
+                if (confirm("@Localizer["Are you sure you want to end the interview early? Your progress will be saved."]")) {
+                    addSystemMessage("@Localizer["Ending interview early..."]");
                     await connection.invoke("EndInterviewEarly");
 
                     // Disable UI elements
@@ -306,7 +310,7 @@
                 }
             } catch (err) {
                 console.error("Error ending interview early:", err);
-                addSystemMessage("Failed to end interview early. Please try again.");
+                addSystemMessage("@Localizer["Failed to end interview early. Please try again."]");
             }
         });
 

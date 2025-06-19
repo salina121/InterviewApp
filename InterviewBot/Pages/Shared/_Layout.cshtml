@@ -1,6 +1,10 @@
 ﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
     var token = Xsrf.GetAndStoreTokens(Context).RequestToken;
+    var currentCulture = Context.Request.Query["culture"].ToString();
+    var cultureParam = !string.IsNullOrEmpty(currentCulture) ? $"?culture={currentCulture}" : "";
 }
 
 <!DOCTYPE html>
@@ -17,7 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" asp-page="/Index">InterviewBot</a>
+                <a class="navbar-brand" href="/@cultureParam">InterviewBot</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -26,16 +30,16 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/Index">Home</a>
+                                <a class="nav-link" href="/@cultureParam">@Localizer["Home"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/Topics/Index">Topics</a>
+                                <a class="nav-link" href="/Topics@(cultureParam)">@Localizer["Topics"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/SubTopics/Index">SubTopics</a>
+                                <a class="nav-link" href="/SubTopics@(cultureParam)">@Localizer["SubTopics"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/InterviewSessions/Index">Sessions</a>
+                                <a class="nav-link" href="/InterviewSessions@(cultureParam)">@Localizer["Sessions"]</a>
                             </li>
                         }
                     </ul>
@@ -43,21 +47,39 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <span class="nav-link">Welcome, @User.Identity.Name!</span>
+                                <span class="nav-link">@Localizer["Welcome"], @User.Identity.Name!</span>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-translate"></i> @Localizer["Language"]
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="?culture=en">English</a></li>
+                                    <li><a class="dropdown-item" href="?culture=es">Español</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
-                                <form method="post" asp-page="/Account/Logout">
-                                    <button type="submit" class="nav-link btn btn-link">Logout</button>
+                                <form method="post" action="/Account/Logout@(cultureParam)">
+                                    <button type="submit" class="nav-link btn btn-link">@Localizer["Logout"]</button>
                                 </form>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-page="/Account/Login">Login</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-translate"></i> @Localizer["Language"]
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="?culture=en">English</a></li>
+                                    <li><a class="dropdown-item" href="?culture=es">Español</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/Account/Register">Register</a>
+                                <a class="nav-link" href="/Account/Login@(cultureParam)">@Localizer["Login"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Account/Register@(cultureParam)">@Localizer["Register"]</a>
                             </li>
                         }
                     </ul>
@@ -94,6 +116,18 @@
                     form.appendChild(antiforgery.cloneNode(true));
                 }
             });
+
+            // Preserve culture in all navigation links
+            const currentCulture = '@currentCulture';
+            if (currentCulture) {
+                document.querySelectorAll('a[href^="/"]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && !href.includes('culture=') && !href.includes('#')) {
+                        const separator = href.includes('?') ? '&' : '?';
+                        link.href = href + separator + 'culture=' + currentCulture;
+                    }
+                });
+            }
         });
     </script>
 
