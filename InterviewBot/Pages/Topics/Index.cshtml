@@ -5,13 +5,12 @@
 @{
     ViewData["Title"] = Localizer["Topics"];
     var currentCulture = HttpContext.Request.Query["culture"].ToString();
-    var cultureParam = !string.IsNullOrEmpty(currentCulture) ? $"?culture={currentCulture}" : "";
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>@Localizer["Topics"]</h2>
-        <a href="/Topics/Create@cultureParam" class="btn btn-primary">
+        <a asp-page="/Topics/Create" asp-route-culture="@currentCulture" class="btn btn-primary">
             <i class="bi bi-plus-lg"></i> @Localizer["New Topic"]
         </a>
     </div>
@@ -28,11 +27,11 @@
                             <small class="text-danger">@Localizer["Completed"]: @topic.CompletionPercentage%</small>
                         </div>
                         <div class="d-flex align-items-center">
-                            <a href="/SubTopics?topicId=@topic.Id@(string.IsNullOrEmpty(cultureParam) ? "" : "&" + cultureParam.Substring(1))" class="btn btn-outline-info btn-sm me-2">@Localizer["Subtopics"]</a>
-                            <a href="/Topics/Edit/@topic.Id@cultureParam" class="btn btn-sm btn-outline-primary me-2">
+                            <a href="/SubTopics?topicId=@topic.Id@(!string.IsNullOrEmpty(currentCulture) ? $"&culture={currentCulture}" : "")" class="btn btn-outline-info btn-sm me-2">@Localizer["Subtopics"]</a>
+                            <a href="/Topics/Edit/@topic.Id@(!string.IsNullOrEmpty(currentCulture) ? $"?culture={currentCulture}" : "")" class="btn btn-sm btn-outline-primary me-2">
                                 <i class="bi bi-pencil"></i> @Localizer["Edit"]
                             </a>
-                            <form method="post" action="/Topics/Index?handler=Delete&id=@topic.Id@(string.IsNullOrEmpty(cultureParam) ? "" : "&" + cultureParam.Substring(1))" class="d-inline">
+                            <form method="post" action="/Topics/Index?handler=Delete&id=@topic.Id@(!string.IsNullOrEmpty(currentCulture) ? $"&culture={currentCulture}" : "")" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@Localizer["Are you sure you want to delete this topic and all its subtopics and questions?"]');">
                                     <i class="bi bi-trash"></i> @Localizer["Delete"]
                                 </button>
@@ -48,7 +47,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <p class="card-text">@Localizer["No topics found. Get started by creating a new topic."]</p>
-                <a href="/Topics/Create@cultureParam" class="btn btn-primary">
+                <a asp-page="/Topics/Create" asp-route-culture="@currentCulture" class="btn btn-primary">
                     <i class="bi bi-plus-lg"></i> @Localizer["New Topic"]
                 </a>
             </div>
