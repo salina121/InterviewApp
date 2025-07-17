@@ -1,0 +1,522 @@
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\appsettings.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.staticwebassets.runtime.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.staticwebassets.endpoints.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\runtimes\win-x64\native\libwkhtmltox.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.exe
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.deps.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.runtimeconfig.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\InterviewBot.pdb
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\es\InterviewBot.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\DinkToPdf.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Humanizer.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Npgsql.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.CodeDom.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Composition.Convention.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Composition.Hosting.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Composition.Runtime.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Composition.TypedParts.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Net.ServerSentEvents.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Text.Json.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\System.Threading.Channels.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Index.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Index.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Account.Login.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Account.Register.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Chat.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Shared._Layout.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Create.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Edit.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Index.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Create.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Edit.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Index.es.resources
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.GenerateResource.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.AssemblyInfoInputs.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.AssemblyInfo.cs
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.RazorAssemblyInfo.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.RazorAssemblyInfo.cs
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.sourcelink.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\es\InterviewBot.resources.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\scopedcss\bundle\InterviewBot.styles.css
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\scopedcss\projectbundle\InterviewBot.bundle.scp.css
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\Intervie.8AD8413B.Up2Date
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\refint\InterviewBot.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.pdb
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\InterviewBot.genruntimeconfig.cache
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\ref\InterviewBot.dll
+C:\Users\DELL\source\repos\InterviewBot\InterviewBot\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\appsettings.Development.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\appsettings.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.staticwebassets.endpoints.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\runtimes\win-x64\native\libwkhtmltox.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.staticwebassets.runtime.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.exe
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.deps.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.runtimeconfig.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\InterviewBot.pdb
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\es\InterviewBot.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\BCrypt.Net-Next.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\DinkToPdf.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\FluentValidation.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Humanizer.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Mono.TextTemplating.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Newtonsoft.Json.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Npgsql.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.CodeDom.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Composition.Convention.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Composition.Hosting.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Composition.Runtime.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Composition.TypedParts.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.IO.Pipelines.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Net.ServerSentEvents.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Text.Json.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\System.Threading.Channels.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.AssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\rpswa.dswa.cache.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Index.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Index.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Account.Login.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Account.Register.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Chat.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Shared._Layout.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Create.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Edit.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Index.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Create.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Edit.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Index.es.resources
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.GenerateResource.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.GeneratedMSBuildEditorConfig.editorconfig
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.AssemblyInfoInputs.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.AssemblyInfo.cs
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.CoreCompileInputs.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.MvcApplicationPartsAssemblyInfo.cs
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.MvcApplicationPartsAssemblyInfo.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.RazorAssemblyInfo.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.RazorAssemblyInfo.cs
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\es\InterviewBot.resources.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\rjimswa.dswa.cache.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\scopedcss\bundle\InterviewBot.styles.css
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\scopedcss\projectbundle\InterviewBot.bundle.scp.css
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\staticwebassets.build.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\staticwebassets.build.json.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\staticwebassets.development.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\Intervie.8AD8413B.Up2Date
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\refint\InterviewBot.dll
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.pdb
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\InterviewBot.genruntimeconfig.cache
+\\Mac\Home\Documents\Visual Studio 2022\InterviewBot\obj\Debug\net8.0\ref\InterviewBot.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.staticwebassets.endpoints.json
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\runtimes\win-x64\native\libwkhtmltox.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\appsettings.json
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.staticwebassets.runtime.json
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.exe
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.deps.json
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.runtimeconfig.json
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\InterviewBot.pdb
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\es\InterviewBot.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\DinkToPdf.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Humanizer.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Npgsql.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.CodeDom.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Composition.Convention.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Composition.Hosting.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Composition.Runtime.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Composition.TypedParts.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Net.ServerSentEvents.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Text.Json.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\System.Threading.Channels.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\david\source\repos\InterviewBot\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.AssemblyReference.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Index.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Index.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Account.Login.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Account.Register.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Chat.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Shared._Layout.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Create.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Edit.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.SubTopics.Index.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Create.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Edit.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.Resources.Pages.Topics.Index.es.resources
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.GenerateResource.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.AssemblyInfoInputs.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.AssemblyInfo.cs
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.csproj.CoreCompileInputs.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.RazorAssemblyInfo.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.RazorAssemblyInfo.cs
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\es\InterviewBot.resources.dll
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\scopedcss\bundle\InterviewBot.styles.css
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\scopedcss\projectbundle\InterviewBot.bundle.scp.css
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\Intervie.8AD8413B.Up2Date
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.dll
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\refint\InterviewBot.dll
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.pdb
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\InterviewBot.genruntimeconfig.cache
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\ref\InterviewBot.dll
+C:\Users\david\source\repos\InterviewBot\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
