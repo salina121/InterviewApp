@@ -5,6 +5,7 @@ using InterviewBot.Services;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 public class InterviewQuestionTracker
 {
@@ -21,14 +22,17 @@ public class InterviewQuestionTracker
 public class ChatHub : Hub
 {
     private readonly AppDbContext _db;
-    private readonly GeminiAgentService _gemini;
+    private readonly IAIAgentService _aiService;
     private static readonly ConcurrentDictionary<string, InterviewSession> _sessions = new();
     private static readonly ConcurrentDictionary<string, InterviewQuestionTracker> _questionTrackers = new();
+    private static readonly object _trackerLock = new object();
+    private static readonly ConcurrentDictionary<string, int> _consecutiveNonAnswers = new();
+    private static readonly ConcurrentDictionary<string, bool> _exitOfferPending = new();
 
-    public ChatHub(AppDbContext db, GeminiAgentService gemini)
+    public ChatHub(AppDbContext db, IAIAgentService aiService)
     {
         _db = db;
-        _gemini = gemini;
+        _aiService = aiService;
     }
 
     public override async Task OnConnectedAsync()
@@ -57,6 +61,8 @@ public class ChatHub : Hub
             }
         }
         _questionTrackers.TryRemove(Context.ConnectionId, out _);
+        _consecutiveNonAnswers.TryRemove(Context.ConnectionId, out _);
+        _exitOfferPending.TryRemove(Context.ConnectionId, out _);
         await base.OnDisconnectedAsync(exception);
     }
 
@@ -115,7 +121,22 @@ public class ChatHub : Hub
             await _db.SaveChangesAsync();
 
             _sessions.TryAdd(Context.ConnectionId, session);
-            await InitializeQuestionTracker(session);
+            
+            try
+            {
+                await InitializeQuestionTracker(session);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to initialize question tracker: {ex}");
+                // Clean up the session since we can't generate questions
+                _sessions.TryRemove(Context.ConnectionId, out _);
+                _db.InterviewSessions.Remove(session);
+                await _db.SaveChangesAsync();
+                
+                await Clients.Caller.SendAsync("ReceiveMessage", "System", "Failed to generate interview questions. Please try again later.");
+                return;
+            }
 
             // Send welcome message in the appropriate language
             var welcomeMessage = interviewLanguage == InterviewLanguage.Spanish 
@@ -133,81 +154,215 @@ public class ChatHub : Hub
 
     private async Task InitializeQuestionTracker(InterviewSession session)
     {
-        var tracker = new InterviewQuestionTracker();
-        var subTopicDescription = session.SubTopic.Description;
-        var topicObjectives = session.SubTopic.Topic?.Objectives;
-
-        // Determine the language for question generation
-        var isSpanish = session.Language == InterviewLanguage.Spanish;
-        var languageInstruction = isSpanish 
-            ? "Generate all questions in Spanish. Respond only in Spanish."
-            : "Generate all questions in English. Respond only in English.";
-
-        var prompt = $"{languageInstruction}\n\n" +
-                     $"Generate 10 distinct technical questions about {session.SubTopic.Title} " +
-                     $"suitable for a candidate with education level {session.CandidateEducation} " +
-                     $"and {session.CandidateExperience} years of experience.";
-
-        if (!string.IsNullOrWhiteSpace(subTopicDescription))
+        lock (_trackerLock)
         {
-            prompt += $" The specific objectives for this sub-topic are: {subTopicDescription}.";
+            // Check if tracker already exists for this connection
+            if (_questionTrackers.ContainsKey(Context.ConnectionId))
+            {
+                Console.WriteLine($"Question tracker already exists for connection {Context.ConnectionId}");
+                return;
+            }
         }
-        else if (!string.IsNullOrWhiteSpace(topicObjectives))
+        
+        try
         {
-            prompt += $" The overall topic objectives are: {topicObjectives}.";
+            var tracker = new InterviewQuestionTracker();
+            var subTopicDescription = session.SubTopic.Description;
+            var topicObjectives = session.SubTopic.Topic?.Objectives;
+            var topicTitle = session.SubTopic.Topic?.Title;
+            var subTopicTitle = session.SubTopic.Title;
+
+            // Determine the language for question generation
+            var isSpanish = session.Language == InterviewLanguage.Spanish;
+            var languageInstruction = isSpanish 
+                ? "Genera todas las preguntas en español. Responde solo en español."
+                : "Generate all questions in English. Respond only in English.";
+
+            // Build a detailed context section for the prompt
+            var contextSection = $"Topic: {topicTitle}\n" +
+                                $"Topic Objective: {topicObjectives}\n" +
+                                $"Subtopic: {subTopicTitle}\n" +
+                                $"Subtopic Objective: {subTopicDescription}\n";
+
+            var prompt = $"{languageInstruction}\n\n" +
+                         $"You are an expert technical interviewer. Use the following context to conduct an interview with the user.\n" +
+                         $"{contextSection}\n\n" +
+                         $"Generate exactly 10 unique and specific technical questions suitable for a candidate with {session.CandidateEducation} education and {session.CandidateExperience} years of experience.\n\n" +
+                         "Requirements:\n" +
+                         "- Generate exactly 10 questions\n" +
+                         "- Make each question unique and specific to the topic and objectives above\n" +
+                         "- Questions should vary in difficulty based on experience level\n" +
+                         "- Include practical, theoretical, and problem-solving questions\n" +
+                         "- Format as numbered list: 1. Question, 2. Question, etc.\n" +
+                         "- Do not include any explanations, just the questions\n" +
+                         "- Each question should be different from the others\n" +
+                         $"- Focus on the specific topic: {subTopicTitle}\n" +
+                         "- Use both the topic and subtopic objectives to guide your questions";
+
+            Console.WriteLine($"Sending question generation prompt to AI: {prompt}");
+            var questions = await _aiService.AskQuestionAsync(prompt);
+            Console.WriteLine($"AI response for questions: {questions}");
+
+            if (string.IsNullOrWhiteSpace(questions) || questions.Contains("No response received") || questions.Contains("Error") || questions.Contains("API Error"))
+            {
+                Console.WriteLine("AI failed to generate questions - cannot proceed with interview");
+                throw new InvalidOperationException("Failed to generate interview questions. Please try again later.");
+            }
+
+            // Parse the AI response
+            var lines = questions.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            var parsedQuestions = new List<string>();
+
+            foreach (var line in lines)
+            {
+                var trimmedLine = line.Trim();
+                if (string.IsNullOrWhiteSpace(trimmedLine)) continue;
+
+                // Try to extract question from numbered format (1. Question, 2. Question, etc.)
+                var questionMatch = System.Text.RegularExpressions.Regex.Match(trimmedLine, @"^\d+\.\s*(.+)$");
+                if (questionMatch.Success)
+                {
+                    var question = questionMatch.Groups[1].Value.Trim();
+                    if (!string.IsNullOrWhiteSpace(question) && question.Length > 5)
+                    {
+                        parsedQuestions.Add(question);
+                    }
+                }
+                else if (trimmedLine.Contains("?") && trimmedLine.Length > 10)
+                {
+                    // If it looks like a question, add it
+                    parsedQuestions.Add(trimmedLine);
+                }
+            }
+
+            if (parsedQuestions.Count >= 10)
+            {
+                tracker.AvailableQuestions.AddRange(parsedQuestions.Take(10));
+                Console.WriteLine($"Successfully parsed {tracker.AvailableQuestions.Count} questions from AI response");
+            }
+            else
+            {
+                Console.WriteLine($"Only parsed {parsedQuestions.Count} questions from AI response - cannot proceed");
+                throw new InvalidOperationException($"Failed to generate enough questions. Only got {parsedQuestions.Count} questions. Please try again.");
+            }
+
+            lock (_trackerLock)
+            {
+                _questionTrackers.TryAdd(Context.ConnectionId, tracker);
+            }
+            Console.WriteLine($"Question tracker initialized with {tracker.AvailableQuestions.Count} questions");
         }
-
-        prompt += " Format the questions as a numbered list.";
-
-        var questions = await _gemini.AskQuestionAsync(prompt);
-
-        tracker.AvailableQuestions.AddRange(questions.Split('\n')
-            .Where(q => q.Contains("."))
-            .Select(q => q.Substring(q.IndexOf('.') + 1).Trim())
-            .ToList());
-
-        _questionTrackers.TryAdd(Context.ConnectionId, tracker);
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error initializing question tracker: {ex}");
+            throw; // Re-throw to be handled by the calling method
+        }
     }
 
     public async Task SendAnswer(string answer)
     {
-        if (!_sessions.TryGetValue(Context.ConnectionId, out var session))
+        try
         {
-            await Clients.Caller.SendAsync("ReceiveMessage", "System", "No active session found.");
-            return;
-        }
+            if (!_sessions.TryGetValue(Context.ConnectionId, out var session))
+            {
+                await Clients.Caller.SendAsync("ReceiveMessage", "System", "No active session found.");
+                return;
+            }
 
-        // Save user message
-        session.Messages.Add(new ChatMessage
-        {
-            Content = answer,
-            IsUserMessage = true,
-            SessionId = session.Id,
-            Timestamp = DateTime.UtcNow
-        });
+            // Save user message
+            session.Messages.Add(new ChatMessage
+            {
+                Content = answer,
+                IsUserMessage = true,
+                SessionId = session.Id,
+                Timestamp = DateTime.UtcNow
+            });
 
-        // If this is the first message (greeting), bot greets and asks first question
-        if (session.CurrentQuestionNumber == 0)
-        {
-            var greetingMessage = session.Language == InterviewLanguage.Spanish
-                ? "¡Encantado de conocerte! Comencemos la entrevista."
-                : "Nice to meet you! Let's begin the interview.";
-            
-            await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", greetingMessage);
-            await AskNextQuestion(session);
-            return;
-        }
+            // Track consecutive non-answers
+            var lastAnswer = answer?.Trim().ToLower() ?? "";
+            var nonAnswers = new[] { "no", "i don't know", "idk", "n/a", "none", "not sure", "nope", "nil", "nothing", "no experience", "haven't", "haven’t", "don't have", "do not have", "can't say", "cannot say", "no answer", "no idea" ,"yes" };
+            bool isNonAnswer = nonAnswers.Any(pattern => lastAnswer == pattern || lastAnswer.StartsWith(pattern + " ") || lastAnswer.Contains(pattern + ".") || lastAnswer.Contains(pattern + ",") || lastAnswer == pattern.Replace("'", ""));
+            if (isNonAnswer)
+            {
+                _consecutiveNonAnswers.AddOrUpdate(Context.ConnectionId, 1, (key, old) => old + 1);
+            }
+            else
+            {
+                _consecutiveNonAnswers[Context.ConnectionId] = 0;
+            }
 
-        // Otherwise, continue with next question or complete
-        if (session.CurrentQuestionNumber < 10)
-        {
-            await _db.SaveChangesAsync();
-            await AskNextQuestion(session);
+            // If this is the first message (greeting), bot greets and asks first question
+            if (session.CurrentQuestionNumber == 0)
+            {
+                var greetingMessage = session.Language == InterviewLanguage.Spanish
+                    ? "¡Encantado de conocerte! Comencemos la entrevista."
+                    : "Nice to meet you! Let's begin the interview.";
+                
+                await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", greetingMessage);
+                
+                try
+                {
+                    await AskNextQuestion(session);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error asking first question: {ex}");
+                    await Clients.Caller.SendAsync("ReceiveMessage", "System", "Failed to start interview. Please try again.");
+                }
+                return;
+            }
+
+            // Otherwise, continue with next question or complete
+            if (session.CurrentQuestionNumber < 10)
+            {
+                await _db.SaveChangesAsync();
+                
+                try
+                {
+                    await AskNextQuestion(session);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error asking next question: {ex}");
+                    await Clients.Caller.SendAsync("ReceiveMessage", "System", "Failed to send message. Please try again.");
+                }
+            }
+            else
+            {
+                // After last question, show complete button
+                await Clients.Caller.SendAsync("ShowCompleteButton");
+            }
+
+            if (_exitOfferPending.TryGetValue(Context.ConnectionId, out var pending) && pending)
+            {
+                var userInput = answer?.Trim().ToLower() ?? "";
+                var endPatterns = new[] { "no", "end", "stop", "finish", "terminate", "exit", "quit" };
+                var continuePatterns = new[] { "yes", "continue", "go on", "keep going", "proceed" };
+                if (endPatterns.Any(p => userInput == p || userInput.StartsWith(p + " ")))
+                {
+                    // End the interview immediately
+                    _exitOfferPending[Context.ConnectionId] = false;
+                    await CompleteInterviewManually();
+                    return;
+                }
+                else if (continuePatterns.Any(p => userInput == p || userInput.StartsWith(p + " ")))
+                {
+                    // Clear the flag and proceed as normal
+                    _exitOfferPending[Context.ConnectionId] = false;
+                    // Continue to AskNextQuestion below
+                }
+                else
+                {
+                    // If ambiguous, repeat the offer
+                    await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", "Please reply 'continue' to proceed or 'end' to finish the interview.");
+                    return;
+                }
+            }
         }
-        else
+        catch (Exception ex)
         {
-            // After last question, show complete button
-            await Clients.Caller.SendAsync("ShowCompleteButton");
+            Console.WriteLine($"Error in SendAnswer: {ex}");
+            await Clients.Caller.SendAsync("ReceiveMessage", "System", "Failed to send message. Please try again.");
         }
     }
 
@@ -262,8 +417,8 @@ public class ChatHub : Hub
             // Generate evaluation
             var isSpanish = dbSession.Language == InterviewLanguage.Spanish;
             var languageInstruction = isSpanish 
-                ? "Evalúa esta entrevista en español. Responde solo en español."
-                : "Evaluate this interview in English. Respond only in English.";
+                ? "Evalúa esta entrevista en español. Responde solo en español. Si una respuesta es incorrecta o el usuario dice 'no lo sé', 'ninguna', 'no', 'n/a' o similar, asigna 0 puntos a esa pregunta y refleja esto en la puntuación final. Si todas las respuestas son de este tipo, la puntuación total debe ser 0/100, sin excepciones. No des ningún puntaje mínimo por participación o educación si ninguna respuesta técnica es correcta."
+                : "Evaluate this interview in English. Respond only in English. If an answer is incorrect or the user says 'I don’t know', 'none', 'no', 'n/a' or similar, give 0 points for that question and reflect this in the final score. If all answers are of this type, the total score must be 0/100, no exceptions. Do not give any minimum score for participation or education if no technical answers are correct.";
             
             var evaluationPrompt = $"{languageInstruction}\n\n" +
                                   $"Evaluate this interview for {dbSession.CandidateName} about {dbSession.SubTopic.Title}.\n";
@@ -311,9 +466,12 @@ public class ChatHub : Hub
 
             Console.WriteLine($"Total Q&A pairs extracted: {qaPairs.Count}");
 
+            // Use all Q&A pairs for comprehensive evaluation
             foreach (var (question, answer) in qaPairs)
             {
-                evaluationPrompt += $"Q: {question}\nA: {answer}\n\n";
+                // Truncate very long answers to avoid token limit but keep more content
+                var truncatedAnswer = answer.Length > 500 ? answer.Substring(0, 500) + "..." : answer;
+                evaluationPrompt += $"Q: {question}\nA: {truncatedAnswer}\n\n";
             }
 
             if (qaPairs.Count == 0)
@@ -324,14 +482,15 @@ public class ChatHub : Hub
             }
 
             evaluationPrompt += isSpanish
-                ? "Proporciona:\n1. Puntuación de 0 a 100 (Puntuación: XX)\n2. Retroalimentación detallada"
-                : "Provide:\n1. Score out of 100 (Score: XX)\n2. Detailed feedback";
+                ? "Proporciona una evaluación completa:\n1. Puntuación de 0 a 100 (Puntuación: XX)\n2. Análisis detallado de las respuestas\n3. Fortalezas identificadas\n4. Áreas de mejora\n5. Recomendaciones específicas"
+                : "Provide a comprehensive evaluation:\n1. Score out of 100 (Score: XX)\n2. Detailed analysis of responses\n3. Identified strengths\n4. Areas for improvement\n5. Specific recommendations";
 
-            Console.WriteLine($"Sending evaluation prompt to AI: {evaluationPrompt}");
+            Console.WriteLine($"Sending evaluation prompt to AI (length: {evaluationPrompt.Length} chars): {evaluationPrompt}");
 
-            var evaluation = await _gemini.AskQuestionAsync(evaluationPrompt);
-
-            // Parse score
+            var evaluation = await _aiService.AskQuestionAsync(evaluationPrompt);
+            Console.WriteLine($"AI evaluation response: {evaluation}");
+            
+            // Only use the agent's score, do not use fallback logic
             int score = 0;
             var scoreMatch = System.Text.RegularExpressions.Regex.Match(evaluation, @"Score:\s*(\d+)");
             if (!scoreMatch.Success)
@@ -342,6 +501,11 @@ public class ChatHub : Hub
             if (scoreMatch.Success)
             {
                 int.TryParse(scoreMatch.Groups[1].Value, out score);
+            }
+            else
+            {
+                // If no score found, set to 0
+                score = 0;
             }
 
             Console.WriteLine($"Parsed score: {score}");
@@ -383,7 +547,148 @@ public class ChatHub : Hub
         {
             _sessions.TryRemove(Context.ConnectionId, out _);
             _questionTrackers.TryRemove(Context.ConnectionId, out _);
+            _consecutiveNonAnswers.TryRemove(Context.ConnectionId, out _);
+            _exitOfferPending.TryRemove(Context.ConnectionId, out _);
         }
+    }
+
+    private string GenerateFallbackEvaluation(List<(string Question, string Answer)> qaPairs, bool isSpanish, InterviewSession session)
+    {
+        // Calculate score based on answer quality
+        var score = CalculateAnswerQualityScore(qaPairs);
+        var performanceLevel = GetPerformanceLevel(score, isSpanish);
+        
+        if (isSpanish)
+        {
+            return $"Puntuación: {score}\n\n" +
+                   $"Evaluación Detallada:\n" +
+                   $"El candidato {session.CandidateName} completó una entrevista sobre {session.SubTopic.Title}.\n" +
+                   $"Se respondieron {qaPairs.Count} preguntas de 10 totales.\n\n" +
+                   $"Análisis de Respuestas:\n" +
+                   $"Basado en la calidad de las respuestas proporcionadas, el candidato muestra un nivel {performanceLevel} de conocimiento en el área.\n\n" +
+                   $"Fortalezas Identificadas:\n" +
+                   $"- Participación activa en la entrevista\n" +
+                   $"- Disposición para responder preguntas técnicas\n" +
+                   $"- Experiencia previa en el campo ({session.CandidateExperience} años)\n\n" +
+                   $"Áreas de Mejora:\n" +
+                   $"- Continuar desarrollando conocimientos técnicos específicos\n" +
+                   $"- Profundizar en conceptos avanzados de {session.SubTopic.Title}\n" +
+                   $"- Practicar con proyectos más complejos\n" +
+                   $"- Mejorar la calidad y detalle de las respuestas\n\n" +
+                   $"Recomendaciones Específicas:\n" +
+                   $"- Continuar estudiando los conceptos fundamentales de {session.SubTopic.Title}\n" +
+                   $"- Practicar con proyectos prácticos y casos de uso reales\n" +
+                   $"- Mantenerse actualizado con las últimas tendencias en el campo\n" +
+                   $"- Considerar certificaciones relevantes para fortalecer el perfil profesional\n" +
+                   $"- Trabajar en proporcionar respuestas más detalladas y específicas";
+        }
+        else
+        {
+            return $"Score: {score}\n\n" +
+                   $"Detailed Evaluation:\n" +
+                   $"The candidate {session.CandidateName} completed an interview about {session.SubTopic.Title}.\n" +
+                   $"They answered {qaPairs.Count} out of 10 questions.\n\n" +
+                   $"Response Analysis:\n" +
+                   $"Based on the quality of the provided answers, the candidate shows a {performanceLevel} level of knowledge in this area.\n\n" +
+                   $"Identified Strengths:\n" +
+                   $"- Active participation in the interview\n" +
+                   $"- Willingness to answer technical questions\n" +
+                   $"- Previous experience in the field ({session.CandidateExperience} years)\n\n" +
+                   $"Areas for Improvement:\n" +
+                   $"- Continue developing specific technical knowledge\n" +
+                   $"- Deepen understanding of advanced concepts in {session.SubTopic.Title}\n" +
+                   $"- Practice with more complex projects\n" +
+                   $"- Improve the quality and detail of responses\n\n" +
+                   $"Specific Recommendations:\n" +
+                   $"- Continue studying the fundamental concepts of {session.SubTopic.Title}\n" +
+                   $"- Practice with hands-on projects and real-world use cases\n" +
+                   $"- Stay updated with the latest trends in the field\n" +
+                   $"- Consider relevant certifications to strengthen professional profile\n" +
+                   $"- Work on providing more detailed and specific answers";
+        }
+    }
+
+    private int CalculateAnswerQualityScore(List<(string Question, string Answer)> qaPairs)
+    {
+        if (qaPairs.Count == 0) return 0;
+        
+        var totalScore = 0;
+        foreach (var (question, answer) in qaPairs)
+        {
+            var answerScore = EvaluateSingleAnswer(answer);
+            totalScore += answerScore;
+        }
+        
+        return Math.Min(100, totalScore / qaPairs.Count);
+    }
+
+    private int EvaluateSingleAnswer(string answer)
+    {
+        if (string.IsNullOrWhiteSpace(answer)) return 0;
+        var trimmedAnswer = answer.Trim().ToLower();
+        // Patterns for non-answers
+        var nonAnswers = new[] { "no", "i don't know", "idk", "n/a", "none", "not sure", "nope", "nil", "nothing", "no experience", "haven't", "haven't", "don't have", "do not have", "can't say", "cannot say", "no answer", "no idea" };
+        if (nonAnswers.Any(pattern =>
+            trimmedAnswer == pattern ||
+            trimmedAnswer.StartsWith(pattern + " ") ||
+            trimmedAnswer.Contains(pattern + ".") ||
+            trimmedAnswer.Contains(pattern + ",") ||
+            trimmedAnswer == pattern.Replace("'", "")))
+            return 0;
+        // Check for nonsense answers (random characters, very short, etc.)
+        if (trimmedAnswer.Length < 3) return 0;
+        if (IsNonsenseAnswer(trimmedAnswer)) return 5;
+        // Score based on answer length and content
+        if (trimmedAnswer.Length < 10) return 10;
+        if (trimmedAnswer.Length < 20) return 20;
+        if (trimmedAnswer.Length < 50) return 40;
+        if (trimmedAnswer.Length < 100) return 60;
+        if (trimmedAnswer.Length < 200) return 80;
+        return 90;
+    }
+
+    private bool IsNonsenseAnswer(string answer)
+    {
+        // Check for patterns that indicate nonsense answers
+        var lowerAnswer = answer.ToLower();
+        
+        // Check for repeated characters (like "asdasd", "zxczxc")
+        if (HasRepeatedPattern(lowerAnswer)) return true;
+        
+        // Check for very short random strings
+        if (answer.Length < 5 && !answer.Contains(" ") && !answer.Contains(".")) return true;
+        
+        // Check for common nonsense patterns
+        var nonsensePatterns = new[] { "asd", "zxc", "qwe", "tyu", "iop", "jkl", "bnm" };
+        return nonsensePatterns.Any(pattern => lowerAnswer.Contains(pattern));
+    }
+
+    private bool HasRepeatedPattern(string text)
+    {
+        if (text.Length < 6) return false;
+        
+        // Check for 3+ character patterns that repeat
+        for (int len = 3; len <= text.Length / 2; len++)
+        {
+            for (int i = 0; i <= text.Length - len * 2; i++)
+            {
+                var pattern = text.Substring(i, len);
+                var nextOccurrence = text.IndexOf(pattern, i + len);
+                if (nextOccurrence >= 0 && nextOccurrence < i + len + 2)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private string GetPerformanceLevel(int score, bool isSpanish)
+    {
+        if (score >= 80) return isSpanish ? "excelente" : "excellent";
+        if (score >= 60) return isSpanish ? "bueno" : "good";
+        if (score >= 40) return isSpanish ? "regular" : "fair";
+        return isSpanish ? "necesita mejorar" : "needs improvement";
     }
 
     public async Task EndInterviewEarly()
@@ -415,48 +720,128 @@ public class ChatHub : Hub
         {
             _sessions.TryRemove(Context.ConnectionId, out _);
             _questionTrackers.TryRemove(Context.ConnectionId, out _);
+            _consecutiveNonAnswers.TryRemove(Context.ConnectionId, out _);
+            _exitOfferPending.TryRemove(Context.ConnectionId, out _);
         }
     }
 
     private async Task AskNextQuestion(InterviewSession session)
     {
-        if (session.IsCompleted) return;
-
-        if (!_questionTrackers.TryGetValue(Context.ConnectionId, out var tracker))
+        try
         {
-            await InitializeQuestionTracker(session);
-            tracker = _questionTrackers[Context.ConnectionId];
+            if (session.IsCompleted) return;
+
+            // Increment question number
+            session.CurrentQuestionNumber++;
+            if (session.CurrentQuestionNumber > 10)
+            {
+                // Should not happen, but just in case
+                await Clients.Caller.SendAsync("ShowCompleteButton");
+                return;
+            }
+
+            // Build the conversation history for the prompt
+            var messages = session.Messages.OrderBy(m => m.Timestamp).ToList();
+            var isSpanish = session.Language == InterviewLanguage.Spanish;
+            var topicTitle = session.SubTopic.Topic?.Title;
+            var topicObjectives = session.SubTopic.Topic?.Objectives;
+            var subTopicTitle = session.SubTopic.Title;
+            var subTopicDescription = session.SubTopic.Description;
+
+            var contextSection = $"Topic: {topicTitle}\n" +
+                                $"Topic Objective: {topicObjectives}\n" +
+                                $"Subtopic: {subTopicTitle}\n" +
+                                $"Subtopic Objective: {subTopicDescription}\n";
+
+            var languageInstruction = isSpanish
+                ? "Eres un entrevistador técnico experto. Antes de hacer la siguiente pregunta, analiza cuidadosamente la respuesta anterior del candidato. Si el candidato responde con 'no', 'no lo sé', 'ninguna', o respuestas similares, adapta la siguiente pregunta para ser más sencilla, de apoyo, o cambia el enfoque a conceptos generales o motivacionales. Si el candidato muestra conocimiento, aumenta la dificultad. Nunca repitas preguntas. Solo responde con la siguiente pregunta, sin explicaciones ni numeración."
+                : "You are an expert technical interviewer. Before asking the next question, carefully interpret the candidate's previous answer. If the candidate responds with 'no', 'I don't know', 'none', 'n/a', or similar, adapt the next question to be simpler, more supportive, or shift to general or motivational topics. If the candidate shows knowledge, increase the difficulty. Never repeat questions. Only output the next question, no explanations or numbering.";
+
+            var prompt = new StringBuilder();
+            prompt.AppendLine(languageInstruction);
+            prompt.AppendLine();
+            prompt.AppendLine(contextSection);
+            prompt.AppendLine();
+            prompt.AppendLine($"You are conducting a technical interview on the topic '{subTopicTitle}'.");
+            prompt.AppendLine($"The candidate has {session.CandidateEducation} education and {session.CandidateExperience} years of experience.");
+            prompt.AppendLine();
+            prompt.AppendLine($"This is question {session.CurrentQuestionNumber} out of 10. Do not repeat previous questions.");
+            prompt.AppendLine();
+            prompt.AppendLine("Conversation so far:");
+
+            int qNum = 1;
+            foreach (var msg in messages)
+            {
+                if (!msg.IsUserMessage && (msg.Content.Contains("Question") || msg.Content.Contains("Pregunta")))
+                {
+                    prompt.AppendLine($"Q{qNum}: {msg.Content}");
+                }
+                else if (msg.IsUserMessage)
+                {
+                    prompt.AppendLine($"A{qNum}: {msg.Content}");
+                    qNum++;
+                }
+            }
+            prompt.AppendLine();
+            prompt.AppendLine("Based on the above, interpret the candidate's previous answer(s) and adapt the next question to their level and previous answers. Only output the next question, no explanations or numbering.");
+
+            int nonAnswerCount = _consecutiveNonAnswers.TryGetValue(Context.ConnectionId, out var count) ? count : 0;
+            bool offerExit = nonAnswerCount >= 4;
+            bool offerAlternative = nonAnswerCount >= 2 && nonAnswerCount < 4;
+
+            if (offerExit)
+            {
+                var exitMsg = isSpanish
+                    ? "He notado que has respondido varias veces que no tienes experiencia o no sabes. ¿Te gustaría terminar la entrevista aquí? Si deseas continuar, por favor indícalo."
+                    : "I've noticed you've answered several times that you don't have experience or don't know. Would you like to end the interview here? If you'd like to continue, please let me know.";
+                await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", exitMsg);
+                _exitOfferPending[Context.ConnectionId] = true;
+                return;
+            }
+            else if (offerAlternative)
+            {
+                var altMsg = isSpanish
+                    ? "He notado que no tienes experiencia en este tema. ¿Te gustaría hablar de otra tecnología, tu experiencia general, o continuar con preguntas más generales? Si prefieres terminar la entrevista, también puedes indicarlo."
+                    : "I've noticed you don't have experience in this topic. Would you like to talk about another technology, your general experience, or continue with more general questions? If you'd prefer to end the interview, you can also let me know.";
+                await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", altMsg);
+                // Continue with a more general/motivational question
+            }
+
+            // Call the AI to get the next question
+            var aiResponse = await _aiService.AskQuestionAsync(prompt.ToString());
+            if (string.IsNullOrWhiteSpace(aiResponse) || aiResponse.Contains("No response received") || aiResponse.Contains("Error"))
+            {
+                await Clients.Caller.SendAsync("ReceiveMessage", "System", isSpanish ? "No se pudo generar la siguiente pregunta. Intenta de nuevo." : "Failed to generate the next question. Please try again.");
+                return;
+            }
+
+            // Clean up AI response: remove leading numbering or 'Question X/10:' or 'Pregunta X/10:'
+            string cleanedQuestion = aiResponse.Trim();
+            cleanedQuestion = System.Text.RegularExpressions.Regex.Replace(cleanedQuestion, @"^(Question|Pregunta)?\s*\d+\s*/\s*10\s*[:\.]?\s*", "", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            cleanedQuestion = System.Text.RegularExpressions.Regex.Replace(cleanedQuestion, @"^\d+\s*[\.:\)]?\s*", "");
+
+            // Format question in the appropriate language
+            var questionPrefix = isSpanish
+                ? $"Pregunta {session.CurrentQuestionNumber}/10: "
+                : $"Question {session.CurrentQuestionNumber}/10: ";
+            var formattedQuestion = questionPrefix + cleanedQuestion;
+            await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", formattedQuestion);
+
+            session.Messages.Add(new ChatMessage
+            {
+                Content = formattedQuestion,
+                IsUserMessage = false,
+                SessionId = session.Id,
+                Timestamp = DateTime.UtcNow
+            });
+
+            await _db.SaveChangesAsync();
         }
-
-        if (tracker.AvailableQuestions.Count == 0)
+        catch (Exception ex)
         {
-            await InitializeQuestionTracker(session);
-            tracker = _questionTrackers[Context.ConnectionId];
+            Console.WriteLine($"Error in AskNextQuestion: {ex}");
+            await Clients.Caller.SendAsync("ReceiveMessage", "System", "Error generating question. Please try again.");
         }
-
-        session.CurrentQuestionNumber++;
-        var random = new Random();
-        int index = random.Next(tracker.AvailableQuestions.Count);
-        var question = tracker.AvailableQuestions[index];
-        tracker.MarkQuestionAsked(question);
-
-        // Format question in the appropriate language
-        var questionPrefix = session.Language == InterviewLanguage.Spanish 
-            ? $"Pregunta {session.CurrentQuestionNumber}/10: "
-            : $"Question {session.CurrentQuestionNumber}/10: ";
-        
-        var formattedQuestion = questionPrefix + question;
-        await Clients.Caller.SendAsync("ReceiveMessage", "Interviewer", formattedQuestion);
-
-        session.Messages.Add(new ChatMessage
-        {
-            Content = formattedQuestion,
-            IsUserMessage = false,
-            SessionId = session.Id,
-            Timestamp = DateTime.UtcNow
-        });
-
-        await _db.SaveChangesAsync();
     }
 
     public async Task ResumeInterview(int sessionId)
@@ -491,7 +876,18 @@ public class ChatHub : Hub
 
             // Add session to active sessions
             _sessions.TryAdd(Context.ConnectionId, session);
-            await InitializeQuestionTracker(session);
+            
+            try
+            {
+                await InitializeQuestionTracker(session);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to initialize question tracker for resume: {ex}");
+                _sessions.TryRemove(Context.ConnectionId, out _);
+                await Clients.Caller.SendAsync("ReceiveMessage", "System", "Failed to generate interview questions. Please try starting a new interview.");
+                return;
+            }
 
             var welcomeBackMessage = session.Language == InterviewLanguage.Spanish
                 ? $"¡Bienvenido de vuelta! Continuemos tu entrevista sobre {session.SubTopic.Title}. ¿Dónde nos quedamos?"

@@ -302,6 +302,10 @@ SubTopics are specific areas within a topic for focused practice:
 
 ## 9. Troubleshooting
 
+- If interviews do not start or you see errors, ensure your AI API key is correctly set in `ai-config.md` or `appsettings.json`.
+- For PDF export, the required library (`libwkhtmltox.dll`) is included with the application for Windows. No extra driver or Ext2Fsd is needed.
+- Guest login is available, but guest sessions may not be saved long-term or may have limited features compared to registered users.
+
 ### 9.1 Common Issues
 
 **Connection Problems:**

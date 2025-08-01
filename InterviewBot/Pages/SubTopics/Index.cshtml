@@ -6,6 +6,10 @@
     ViewData["Title"] = Localizer["SubTopics"];
     var topicIdForCreate = Model.CurrentTopic?.Id;
     var currentCulture = HttpContext.Request.Query["culture"].ToString();
+    if (string.IsNullOrEmpty(currentCulture))
+    {
+        currentCulture = HttpContext.Request.Cookies["culture"] ?? "en";
+    }
 }
 
 <div class="container mt-4">
@@ -30,7 +34,7 @@
                         <tr>
                             <th>@Localizer["Title"]</th>
                             <th>@Localizer["Topic"]</th>
-                            <th>@Localizer["Interview Completed"]</th>
+                            <th>@Localizer["Interview Status"]</th>
                             <th>@Localizer["Actions"]</th>
                         </tr>
                     </thead>
@@ -40,16 +44,50 @@
                             <tr>
                                 <td>@st.Title</td>
                                 <td>@st.TopicName</td>
-                                <td>@(st.IsInterviewCompleted ? Localizer["Yes"] : Localizer["No"])</td>
                                 <td>
                                     @if (st.IsInterviewCompleted)
                                     {
-                                        <a href="/InterviewSessions/Results?id=@st.CompletedSessionId@(!string.IsNullOrEmpty(currentCulture) ? $"&culture={currentCulture}" : "")" class="btn btn-sm btn-outline-success">@Localizer["View Resume"]</a>
+                                        <span class="badge bg-success">@Localizer["Completed"]</span>
+                                    }
+                                    else if (st.HasIncompleteSession)
+                                    {
+                                        <span class="badge bg-warning">@Localizer["In Progress"]</span>
                                     }
                                     else
                                     {
-                                        <a href="/Chat?subTopicId=@st.Id@(!string.IsNullOrEmpty(currentCulture) ? $"&culture={currentCulture}" : "")" class="btn btn-sm btn-outline-primary">@Localizer["Start Interview"]</a>
+                                        <span class="badge bg-secondary">@Localizer["Not Started"]</span>
                                     }
+                                </td>
+                                <td>
+                                    @{
+                                        var buttonText = "Start Interview";
+                                        var buttonClass = "btn-outline-primary";
+                                        var buttonIcon = "bi-play-circle";
+                                        var buttonUrl = $"/Chat?subTopicId={st.Id}";
+                                        
+                                        if (st.IsInterviewCompleted)
+                                        {
+                                            buttonText = "View Results";
+                                            buttonClass = "btn-outline-success";
+                                            buttonIcon = "bi-eye";
+                                            buttonUrl = $"/InterviewSessions/Results?id={st.CompletedSessionId}";
+                                        }
+                                        else if (st.HasIncompleteSession)
+                                        {
+                                            buttonText = "Resume Interview";
+                                            buttonClass = "btn-outline-warning";
+                                            buttonIcon = "bi-arrow-clockwise";
+                                            buttonUrl = $"/Chat?subTopicId={st.Id}&resume={st.LatestSessionId}";
+                                        }
+                                        
+                                        if (!string.IsNullOrEmpty(currentCulture))
+                                        {
+                                            buttonUrl += $"&culture={currentCulture}";
+                                        }
+                                    }
+                                    <a href="@buttonUrl" class="btn btn-sm @buttonClass">
+                                        <i class="@buttonIcon"></i> @Localizer[buttonText]
+                                    </a>
                                     <a href="/SubTopics/Edit/@st.Id@(!string.IsNullOrEmpty(currentCulture) ? $"?culture={currentCulture}" : "")" class="btn btn-sm btn-outline-secondary">
                                         <i class="bi bi-pencil"></i> @Localizer["Edit"]
                                     </a>

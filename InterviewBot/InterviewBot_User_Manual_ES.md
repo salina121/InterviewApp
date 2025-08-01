@@ -302,6 +302,10 @@ Los subtemas son áreas específicas dentro de un tema para práctica enfocada:
 
 ## 9. Solución de Problemas
 
+- Si las entrevistas no inician o ves errores, asegúrate de que tu clave API de IA esté correctamente configurada en `ai-config.md` o `appsettings.json`.
+- Para la exportación PDF, la biblioteca necesaria (`libwkhtmltox.dll`) ya está incluida para Windows. No se necesita ningún controlador adicional ni Ext2Fsd.
+- El acceso como invitado está disponible, pero las sesiones de invitado pueden no guardarse a largo plazo o tener funciones limitadas en comparación con los usuarios registrados.
+
 ### 9.1 Problemas Comunes
 
 **Problemas de Conexión:**

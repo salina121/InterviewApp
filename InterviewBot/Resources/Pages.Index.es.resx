@@ -48,4 +48,13 @@
   <data name="Create Your First Topic" xml:space="preserve">
     <value>Crear Tu Primer Tema</value>
   </data>
+  <data name="Start Interview" xml:space="preserve">
+    <value>Comenzar Entrevista</value>
+  </data>
+  <data name="View Results" xml:space="preserve">
+    <value>Ver Resultados</value>
+  </data>
+  <data name="Resume Interview" xml:space="preserve">
+    <value>Reanudar Entrevista</value>
+  </data>
 </root>

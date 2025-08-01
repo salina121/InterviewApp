@@ -40,30 +40,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home">
-    <value>Inicio</value>
+    <value>Home</value>
   </data>
   <data name="Topics">
-    <value>Temas</value>
+    <value>Topics</value>
   </data>
   <data name="SubTopics">
-    <value>Subtemas</value>
+    <value>SubTopics</value>
   </data>
   <data name="Sessions">
-    <value>Sesiones</value>
+    <value>Sessions</value>
   </data>
   <data name="Welcome">
-    <value>Bienvenido</value>
+    <value>Welcome</value>
   </data>
   <data name="Language">
-    <value>Idioma</value>
+    <value>Language</value>
   </data>
   <data name="Logout">
-    <value>Cerrar Sesión</value>
+    <value>Logout</value>
   </data>
   <data name="Login">
-    <value>Iniciar Sesión</value>
+    <value>Login</value>
   </data>
   <data name="Register">
-    <value>Registrarse</value>
+    <value>Register</value>
   </data>
 </root> 

@@ -36,14 +36,18 @@ builder.Services.AddRazorPages()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();
 
-
 builder.Services.AddMemoryCache();
-// Add this with your other service registrations
-builder.Services.AddScoped<GeminiAgentService>();
+
+// Add OpenAI service only
+builder.Services.AddScoped<IAIAgentService, OpenAIAgentService>();
 
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"), 
+        npgsqlOptions => npgsqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 3,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorCodesToAdd: null)));
 
 // Authentication with persistent cookie store
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -105,24 +109,13 @@ var localizationOptions = new RequestLocalizationOptions()
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
 
-
 // Configure the HTTP pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-app.MapGet("/testgemini", async (GeminiAgentService gemini) => {
-    try
-    {
-        var response = await gemini.AskQuestionAsync("Hello");
-        return Results.Ok(response);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem(ex.ToString());
-    }
-});
+
 // In your app configuration (after UseRouting)
 app.UseCors("SignalRCors");
 app.UseRequestLocalization();
@@ -144,27 +137,11 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Debug endpoints
-app.MapGet("/debug/auth", (HttpContext context) =>
-    Results.Json(new
-    {
-        IsAuthenticated = context.User.Identity?.IsAuthenticated,
-        UserName = context.User.Identity?.Name,
-        Claims = context.User.Claims.Select(c => new { c.Type, c.Value })
-    }));
-
 app.MapRazorPages();
-await InitializeDatabase(app);
+
 app.Run();
 
-async Task InitializeDatabase(WebApplication app)
-{
-    using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await db.Database.MigrateAsync();
-}
-
-// Ticket store for persistent sessions
+// Memory cache ticket store for authentication
 public class MemoryCacheTicketStore : ITicketStore
 {
     private readonly IMemoryCache _cache;
@@ -183,36 +160,28 @@ public class MemoryCacheTicketStore : ITicketStore
 
     public Task<AuthenticationTicket?> RetrieveAsync(string key)
     {
-        _cache.TryGetValue(key, out AuthenticationTicket? ticket);
-        return Task.FromResult<AuthenticationTicket?>(ticket);
+        var ticket = _cache.Get<AuthenticationTicket>(key);
+        return Task.FromResult(ticket);
     }
 
     public Task<string> StoreAsync(AuthenticationTicket ticket)
     {
-        var key = KeyPrefix + Guid.NewGuid();
-        var options = new MemoryCacheEntryOptions();
-        var expiresUtc = ticket.Properties.ExpiresUtc;
-
-        if (expiresUtc.HasValue)
-            options.SetAbsoluteExpiration(expiresUtc.Value);
-
-        options.SetSlidingExpiration(TimeSpan.FromDays(1));
+        var key = KeyPrefix + Guid.NewGuid().ToString();
+        var options = new MemoryCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(30)
+        };
         _cache.Set(key, ticket, options);
-
         return Task.FromResult(key);
     }
 
     public Task RenewAsync(string key, AuthenticationTicket ticket)
     {
-        var options = new MemoryCacheEntryOptions();
-        var expiresUtc = ticket.Properties.ExpiresUtc;
-
-        if (expiresUtc.HasValue)
-            options.SetAbsoluteExpiration(expiresUtc.Value);
-
-        options.SetSlidingExpiration(TimeSpan.FromDays(1));
+        var options = new MemoryCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(30)
+        };
         _cache.Set(key, ticket, options);
-
         return Task.CompletedTask;
     }
 }

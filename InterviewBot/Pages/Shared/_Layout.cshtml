@@ -4,10 +4,16 @@
 @{
     var token = Xsrf.GetAndStoreTokens(Context).RequestToken;
     var currentCulture = Context.Request.Query["culture"].ToString();
+    if (string.IsNullOrEmpty(currentCulture))
+    {
+        currentCulture = Context.Request.Cookies["culture"] ?? "en";
+    }
+    var isEnglish = currentCulture == "en";
+    var isSpanish = currentCulture == "es";
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@currentCulture">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,8 +59,8 @@
                                     <i class="bi bi-translate"></i> @Localizer["Language"]
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="?culture=en">English</a></li>
-                                    <li><a class="dropdown-item" href="?culture=es">Español</a></li>
+                                    <li><a class="dropdown-item @(isEnglish ? "active" : "")" href="?culture=en" onclick="setLanguage('en')">English @(isEnglish ? "✓" : "")</a></li>
+                                    <li><a class="dropdown-item @(isSpanish ? "active" : "")" href="?culture=es" onclick="setLanguage('es')">Español @(isSpanish ? "✓" : "")</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -70,8 +76,8 @@
                                     <i class="bi bi-translate"></i> @Localizer["Language"]
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="?culture=en">English</a></li>
-                                    <li><a class="dropdown-item" href="?culture=es">Español</a></li>
+                                    <li><a class="dropdown-item @(isEnglish ? "active" : "")" href="?culture=en" onclick="setLanguage('en')">English @(isEnglish ? "✓" : "")</a></li>
+                                    <li><a class="dropdown-item @(isSpanish ? "active" : "")" href="?culture=es" onclick="setLanguage('es')">Español @(isSpanish ? "✓" : "")</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -128,6 +134,12 @@
                 });
             }
         });
+
+        // Function to set language and persist it
+        function setLanguage(culture) {
+            // Set cookie to persist language preference
+            document.cookie = `culture=${culture}; path=/; max-age=${60 * 60 * 24 * 365}`; // 1 year
+        }
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)

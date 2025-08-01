@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <data name="SubTopics" xml:space="preserve">
-    <value>SubTemas</value>
+    <value>SubTopics</value>
   </data>
   <data name="List of SUB TOPICS" xml:space="preserve">
-    <value>Lista de SUB TEMAS</value>
+    <value>List of SUB TOPICS</value>
   </data>
   <data name="TOPIC" xml:space="preserve">
-    <value>TEMA</value>
+    <value>TOPIC</value>
   </data>
   <data name="Create New" xml:space="preserve">
-    <value>Crear Nuevo</value>
+    <value>Create New</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Título</value>
+    <value>Title</value>
   </data>
   <data name="Topic" xml:space="preserve">
-    <value>Tema</value>
+    <value>Topic</value>
   </data>
   <data name="Interview Status" xml:space="preserve">
-    <value>Estado de la Entrevista</value>
+    <value>Interview Status</value>
   </data>
   <data name="Actions" xml:space="preserve">
-    <value>Acciones</value>
+    <value>Actions</value>
   </data>
   <data name="Completed" xml:space="preserve">
-    <value>Completada</value>
+    <value>Completed</value>
   </data>
   <data name="In Progress" xml:space="preserve">
-    <value>En Progreso</value>
+    <value>In Progress</value>
   </data>
   <data name="Not Started" xml:space="preserve">
-    <value>No Iniciada</value>
+    <value>Not Started</value>
   </data>
   <data name="Start Interview" xml:space="preserve">
-    <value>Comenzar Entrevista</value>
+    <value>Start Interview</value>
   </data>
   <data name="View Results" xml:space="preserve">
-    <value>Ver Resultados</value>
+    <value>View Results</value>
   </data>
   <data name="Resume Interview" xml:space="preserve">
-    <value>Reanudar Entrevista</value>
+    <value>Resume Interview</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Editar</value>
+    <value>Edit</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Eliminar</value>
+    <value>Delete</value>
   </data>
   <data name="Are you sure?" xml:space="preserve">
-    <value>¿Estás seguro?</value>
+    <value>Are you sure?</value>
   </data>
 </root> 

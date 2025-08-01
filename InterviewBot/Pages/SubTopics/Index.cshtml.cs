@@ -34,14 +34,17 @@ namespace InterviewBot.Pages.SubTopics
                 
                 SubTopics = allSubTopics.Select(st =>
                 {
-                    var completedSession = st.InterviewSessions.FirstOrDefault(s => s.IsCompleted);
+                    var latestSession = st.InterviewSessions.OrderByDescending(s => s.StartTime).FirstOrDefault();
                     return new SubTopicViewModel
                     {
                         Id = st.Id,
                         Title = st.Title,
                         TopicName = st.Topic.Title,
-                        IsInterviewCompleted = completedSession != null,
-                        CompletedSessionId = completedSession?.Id
+                        IsInterviewCompleted = latestSession?.IsCompleted ?? false,
+                        CompletedSessionId = latestSession?.IsCompleted == true ? latestSession.Id : null,
+                        LatestSessionId = latestSession?.Id,
+                        HasIncompleteSession = latestSession != null && !latestSession.IsCompleted && (latestSession.EndTime.HasValue || latestSession.CurrentQuestionNumber > 0),
+                        IsNewInterview = latestSession == null
                     };
                 }).ToList();
 
@@ -62,14 +65,17 @@ namespace InterviewBot.Pages.SubTopics
 
             SubTopics = subTopicsFromDb.Select(st =>
             {
-                var completedSession = st.InterviewSessions.FirstOrDefault(s => s.IsCompleted);
+                var latestSession = st.InterviewSessions.OrderByDescending(s => s.StartTime).FirstOrDefault();
                 return new SubTopicViewModel
                 {
                     Id = st.Id,
                     Title = st.Title,
                     TopicName = CurrentTopic.Title,
-                    IsInterviewCompleted = completedSession != null,
-                    CompletedSessionId = completedSession?.Id
+                    IsInterviewCompleted = latestSession?.IsCompleted ?? false,
+                    CompletedSessionId = latestSession?.IsCompleted == true ? latestSession.Id : null,
+                    LatestSessionId = latestSession?.Id,
+                    HasIncompleteSession = latestSession != null && !latestSession.IsCompleted && (latestSession.EndTime.HasValue || latestSession.CurrentQuestionNumber > 0),
+                    IsNewInterview = latestSession == null
                 };
             }).ToList();
 
@@ -98,5 +104,8 @@ namespace InterviewBot.Pages.SubTopics
         public string TopicName { get; set; } = string.Empty;
         public bool IsInterviewCompleted { get; set; }
         public int? CompletedSessionId { get; set; }
+        public int? LatestSessionId { get; set; }
+        public bool HasIncompleteSession { get; set; }
+        public bool IsNewInterview { get; set; }
     }
 }

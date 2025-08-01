@@ -3,8 +3,12 @@
 @inject IViewLocalizer Localizer
 @model InterviewBot.Pages.IndexModel
 @{
-    ViewData["Title"] = @Localizer["My Interview Topics"];
+    ViewData["Title"] = Localizer["My Interview Topics"];
     var currentCulture = HttpContext.Request.Query["culture"].ToString();
+    if (string.IsNullOrEmpty(currentCulture))
+    {
+        currentCulture = HttpContext.Request.Cookies["culture"] ?? "en";
+    }
 }
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -92,9 +96,38 @@
                                     {
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             @sub.Title
-                                            <a class="btn btn-sm btn-outline-primary"
-                                               href="/Chat?subTopicId=@sub.Id@(!string.IsNullOrEmpty(currentCulture) ? $"&culture={currentCulture}" : "")">
-                                                @Localizer["Start"]
+                                            @{
+                                                var latestSession = sub.InterviewSessions?.OrderByDescending(s => s.StartTime).FirstOrDefault();
+                                                var buttonText = "Start Interview";
+                                                var buttonClass = "btn-outline-primary";
+                                                var buttonIcon = "bi-play-circle";
+                                                var buttonUrl = $"/Chat?subTopicId={sub.Id}";
+                                                
+                                                if (latestSession != null)
+                                                {
+                                                    if (latestSession.IsCompleted)
+                                                    {
+                                                        buttonText = "View Results";
+                                                        buttonClass = "btn-outline-success";
+                                                        buttonIcon = "bi-eye";
+                                                        buttonUrl = $"/InterviewSessions/Results?id={latestSession.Id}";
+                                                    }
+                                                    else if (latestSession.EndTime.HasValue || latestSession.CurrentQuestionNumber > 0)
+                                                    {
+                                                        buttonText = "Resume Interview";
+                                                        buttonClass = "btn-outline-warning";
+                                                        buttonIcon = "bi-arrow-clockwise";
+                                                        buttonUrl = $"/Chat?subTopicId={sub.Id}&resume={latestSession.Id}";
+                                                    }
+                                                }
+                                                
+                                                if (!string.IsNullOrEmpty(currentCulture))
+                                                {
+                                                    buttonUrl += $"&culture={currentCulture}";
+                                                }
+                                            }
+                                            <a class="btn btn-sm @buttonClass" href="@buttonUrl">
+                                                <i class="@buttonIcon"></i> @Localizer[buttonText]
                                             </a>
                                         </li>
                                     }
@@ -110,18 +143,6 @@
             }
         </div>
     }
-</div>
-
-<div class="position-fixed bottom-0 end-0 p-3">
-    <div class="btn-group dropup">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-translate"></i> @Localizer["Language"]
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="?culture=en">English</a></li>
-            <li><a class="dropdown-item" href="?culture=es">Español</a></li>
-        </ul>
-    </div>
 </div>
 
 <style>
